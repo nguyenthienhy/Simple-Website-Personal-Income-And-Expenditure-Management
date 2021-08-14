@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url('/images/background.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+#Introduce{
+    position: absolute;
+    z-index:999;
+    margin-top: 20%;
+    margin-left: 35%;
+    color: #fff;
+}
+.modal-header {
+    background-color:rgb(152, 198, 251);
+    color: #ffffff;
+}
+.navbar {
+    margin-bottom: 0;
+    background-color:rgb(152, 198, 251);
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+}
+  
+.navbar li a, .navbar .navbar-brand {
+    color: yellow !important;
+}
+  
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color:chocolate !important;
+    background-color: #fff !important;
+}
+  
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+#tableSignUp{
+    padding-top: 4%;
+}
+#tableSignIn{
+    padding-top: 10%;
+}
+#typechi , #typethu{
+    height: 300px;
+    overflow: auto;
+}
+.li , .li_thu{
+   cursor: pointer; 
+}
+

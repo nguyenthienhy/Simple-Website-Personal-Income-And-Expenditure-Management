@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Your account</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/javascript/jquery.js"></script>
+    <script src="/javascript/bootstrap.min.js"></script>
+    <script src="/javascript/about.js"></script>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url('/images/background.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 125%;
+font-family: 'Numans', sans-serif;
+}
+</style>
+<script>
+    $(document).ready(function (e) {
+        $("#tempData").hide(); 
+        $.get("http://localhost:3000/<%= ID %>/khoanchi", function (ketqua) {
+            $('#moneybargain').html(ketqua);
+            $('#moneybargain').html($('#sum').val());
+        });
+        $.get("http://localhost:3000/<%= ID %>/khoanthu", function (ketqua) {
+            $('#moneyincome').html(ketqua);
+            $('#moneyincome').html($('#sum').val());
+        });
+        $.get("http://localhost:3000/<%= ID %>/thongke", function (ketqua) {
+            $('#moneyVichi').html(ketqua);
+            $('#moneyVichi').html("Đã chi:" + " " + $('#sum1').val());
+            $('#moneyVithu').html(ketqua);
+            $('#moneyVithu').html("Đã thu:" + " " + $('#sum2').val());
+            $('#moneyVilast').html(ketqua);
+            $('#moneyVilast').html("Còn lại:" + " " + (parseInt($('#sum2').val()) + parseInt($("#tempVi").val()) - parseInt($('#sum1').val())) + " VNĐ" );
+            $('#moneyATMchi').html(ketqua);
+            $('#moneyATMchi').html("Đã chi:" + " " + $('#sum3').val());
+            $('#moneyATMthu').html(ketqua);
+            $('#moneyATMthu').html("Đã thu:" + " " + $('#sum4').val());
+            $('#moneyATMlast').html(ketqua);
+            $('#moneyATMlast').html("Còn lại:" + " " + (parseInt($('#sum4').val()) + parseInt($("#tempATM").val()) - parseInt($('#sum3').val())) + " VNĐ" );
+            $('#moneySTKchi').html(ketqua);
+            $('#moneySTKchi').html("Đã chi:" + " " + $('#sum5').val());
+            $('#moneySTKthu').html(ketqua);
+            $('#moneySTKthu').html("Đã thu:" + " " + $('#sum6').val());
+            $('#moneySTKlast').html(ketqua);
+            $('#moneySTKlast').html("Còn lại:" + " " + (parseInt($('#sum6').val()) + parseInt($("#tempSTK").val()) - parseInt($('#sum5').val())) + " VNĐ" );
+            $('#moneyCQchi').html(ketqua);
+            $('#moneyCQchi').html("Đã chi:" + " " + $('#sum7').val());
+            $('#moneyCQthu').html(ketqua);
+            $('#moneyCQthu').html("Đã thu:" + " " + $('#sum8').val());
+            $('#moneyCQlast').html(ketqua);
+            $('#moneyCQlast').html("Còn lại:" + " " + (parseInt($('#sum8').val()) + parseInt($("#tempCQ").val()) - parseInt($('#sum7').val())) + " VNĐ" );
+        });
+        $("#reset").click(function(e){
+            $("#change_name").attr("value" , "");
+            $("#change_moneyVi").attr("value" , "");
+            $("#change_moneyATM").attr("value" , "");
+            $("#change_moneySTK").attr("value" , "");
+            $("#change_moneyCQ").attr("value" , "");
+            $("#change_password").attr("value" , "");
+        });
+    });
+</script>
+<body>
+    <hr>
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1><%= username %></h1>
+            </div>
+            <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image"
+                        class="img-circle img-responsive"
+                        src="/images/user.jpg"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="text-center">
+                    <img src="/images/avatar.png" class="avatar img-circle img-thumbnail"
+                        alt="avatar">
+                </div>
+                </hr><br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Your ID <i class="fa fa-link fa-1x"></i></div>
+                    <div class="panel-body"><a href="http://bootnipets.com"><%= ID %></a></div>
+                </div>
+
+
+                <ul class="list-group">
+                    <li class="list-group-item text-muted">Tài khoản <i class="fa fa-dashboard fa-1x"></i></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Ví</strong></span>Ban đầu: <%= data.rows[0].vi %>
+                        VNĐ <br>
+                        <label id="moneyVichi" value=""></label> <br>
+                        <label id="moneyVithu" value=""></label> <br>
+                        <label id="moneyVilast" value=""></label>
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>ATM</strong></span>Ban đầu:
+                        <%= data.rows[0].atm %> VNĐ <br>
+                        <label id="moneyATMchi"></label> <br>
+                        <label id="moneyATMthu"></label> <br>
+                        <label id="moneyATMlast"></label>
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Sổ tiết
+                                kiệm</strong></span>Ban đầu: <%= data.rows[0].stk %> VNĐ <br>
+                        <label id="moneySTKchi"></label> <br>
+                        <label id="moneySTKthu"></label> <br>
+                        <label id="moneySTKlast"></label>
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Công
+                                quỹ</strong></span>Ban đầu: <%= data.rows[0].cq %> VNĐ <br>
+                        <label id="moneyCQchi"></label> <br>
+                        <label id="moneyCQthu"></label> <br>
+                        <label id="moneyCQlast"></label>
+                    </li>
+                </ul>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Tổng số tiền hiện có</div>
+                    <div class="panel-body">
+                        <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i
+                            class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
+                            class="fa fa-google-plus fa-2x"></i>
+                        <%= parseInt(data.rows[0].initialmoney) + parseInt(data.rows[0].inmoney) - parseInt(data.rows[0].outmoney)%> VNĐ
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                    <li><a data-toggle="tab" href="#change">Change</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <hr>
+                        <form>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="first_name">
+                                        <h4>Tên đăng nhập</h4>
+                                    </label>
+                                    <label type="text" class="form-control" name="name"
+                                        id="name"><%= data.rows[0].name %></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="last_name">
+                                        <h4>ID tài khoản</h4>
+                                    </label>
+                                    <label type="text" class="form-control" name="ID_account"
+                                        id="ID_account"><%= data.rows[0].id %></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phone">
+                                        <h4>Số tiền ban đầu</h4>
+                                    </label>
+                                    <label type="text" class="form-control" name="moneyInitial"
+                                        id="moneyInitial"><%= data.rows[0].initialmoney %> VNĐ</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email">
+                                        <h4>Số tiền đã thu</h4>
+                                    </label>
+                                    <label type="txt" class="form-control" name="moneyincome"
+                                        id="moneyincome"><%= data.rows[0].inmoney %></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email">
+                                        <h4>Số tiền đã chi</h4>
+                                    </label>
+                                    <label type="txt" class="form-control"
+                                        id="moneybargain"><%= data.rows[0].outmoney %></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email">
+                                        <h4>Số tiền còn lại</h4>
+                                    </label>
+                                    <label type="txt" class="form-control"
+                                        id="moneylast"><%= parseInt(data.rows[0].initialmoney) + parseInt(data.rows[0].inmoney) - parseInt(data.rows[0].outmoney)%> VNĐ</label>
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                    </div>
+                    <div class="tab-pane" id="change">
+                        <hr>
+                        <form class="form" action="/<%= ID %>/about/update" method="POST" role="form">
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="first_name">
+                                        <h4>Tên đăng nhập</h4>
+                                    </label>
+                                    <input type="text" class="form-control" name="changename" id="change_name"
+                                        placeholder="name" required pattern="\S+.*">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phone">
+                                        <h4>Số tiền trong ví</h4>
+                                    </label>
+                                    <input type="text" class="form-control" name="changemoneyVi"
+                                        id="change_moneyVi" placeholder="enter a number" required pattern="\S+.*">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phone">
+                                        <h4>Số tiền trong ATM</h4>
+                                    </label>
+                                    <input type="text" class="form-control" name="changemoneyATM"
+                                        id="change_moneyATM" placeholder="enter a number" required pattern="\S+.*">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phone">
+                                        <h4>Số tiền trong sổ tiết kiệm</h4>
+                                    </label>
+                                    <input type="text" class="form-control" name="changemoneySTK"
+                                        id="change_moneySTK" placeholder="enter a number" required pattern="\S+.*">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phone">
+                                        <h4>Số tiền công quỹ</h4>
+                                    </label>
+                                    <input type="text" class="form-control" name="changemoneyCQ"
+                                        id="change_moneyCQ" placeholder="enter a number" required pattern="\S+.*">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="password">
+                                        <h4>Password</h4>
+                                    </label>
+                                    <input type="password" class="form-control" name="changepassword"
+                                        id="change_password" placeholder="password" required pattern="\S+.*">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit"><i
+                                            class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                    <button class="btn btn-lg" type="reset" id="reset"><i class="glyphicon glyphicon-repeat"></i>
+                                        Reset</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <hr>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tempData">
+        <input id="tempVi" value="<%= data.rows[0].vi %>">
+        <input id="tempATM" value="<%= data.rows[0].atm %>">
+        <input id="tempSTK" value="<%= data.rows[0].stk %>">
+        <input id="tempCQ" value="<%= data.rows[0].cq %>">
+    </div>
+</body>
+</html>

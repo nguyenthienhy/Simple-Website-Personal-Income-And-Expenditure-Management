@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Quan Ly Thu Chi Ca Nhan</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <script src="/javascript/jquery.js"></script>
+    <script src="/javascript/bootstrap.min.js"></script>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="60">
+    <!--Tiêu đề trang start-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://localhost:3000">QUẢN LÝ THU CHI</a>
+            </div>
+            <div class="collapse navbar-collapse" id="header">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://localhost:3000" id="home">GIỚI THIỆU VỀ HỆ THỐNG</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Tiêu đề trang end-->
+    <div class="text-center" id="Introduce">
+        <h1 style="font-size: 35px;">Quản Lý Ví Tiền Của Bạn</h1>
+        <p style="font-size: 25px;">Chưa bao giờ đơn giản đến vậy</p>
+        <form class="form-inline">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tableSignIn">Đăng
+                nhập</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tableSignUp">Đăng ký</button>
+        </form>
+    </div>
+    <!--table Sign Up start-->
+    <div class="modal fade" id="tableSignUp" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Tạo kho ngân sách của bạn</h4>
+                </div>
+                <div class="modal-body" id="bodySignUp">
+                    <form action="/dangky" method="POST" role="form">
+                        <div class="form-group">
+                            <label for="usr">Tên:</label>
+                            <input type="text" class="form-control" id="usr" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Mật khẩu:</label>
+                            <input type="password" class="form-control" id="pwd" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Số tiền trong Ví:</label>
+                            <input type="txt" class="form-control" id="vi" name="vi" placeholder="enter a number">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Số tiền trong ATM:</label>
+                            <input type="txt" class="form-control" id="atm" name="atm" placeholder="enter a number">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Số tiền trong Sổ tiết kiệm:</label>
+                            <input type="txt" class="form-control" id="stk" name="stk" placeholder="enter a number">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Số tiền Công quỹ:</label>
+                            <input type="txt" class="form-control" id="cq" name="cq" placeholder="enter a number">
+                        </div>
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-default">Đăng ký</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--table Sign Up End-->
+    <!--table Sign In start-->
+    <div class="modal fade" id="tableSignIn" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Đăng nhập</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/dangnhap" method="POST" role="form">
+                        <div class="form-group">
+                            <label for="usr">Tên Đăng Nhập:</label>
+                            <input type="text" class="form-control" id="usrName" name="nameuser" required pattern="\S+.*"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Mật khẩu:</label>
+                            <input type="password" class="form-control" id="pwdName" name="pwuser" required pattern="\S+.*"/>
+                        </div>
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-default">Đăng nhập</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--table Sign In End-->
+</body>
+</html>

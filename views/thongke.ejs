@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Thống Kê</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <script src="/javascript/jquery.js"></script>
+    <script src="/javascript/bootstrap.min.js"></script>
+</head>
+<style>
+    .jumbotron {
+        padding: 5%;
+    }
+
+    #form {
+        padding-top: 2%;
+    }
+</style>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="60">
+    <!--Tiêu đề trang start-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://localhost:3000/<%= ID %>">HOME</a>
+            </div>
+            <div class="collapse navbar-collapse" id="header">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://localhost:3000/<%= ID %>/khoanchi" id="khoanchi">KHOẢN CHI</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/khoanthu" id="khoanthu">KHOẢN THU</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/loaichi">LOẠI KHOẢN CHI</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/loaithu">LOẠI KHOẢN THU</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/thongke">THỐNG KÊ</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/about">TÀI KHOẢN</a></li>
+                    <li><a href="http://localhost:3000">ĐĂNG XUẤT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ul class="nav nav-tabs" id="type">
+        <li class="active"><a data-toggle="tab" href="#home">Ví</a></li>
+        <li><a data-toggle="tab" href="#menu1">ATM</a></li>
+        <li><a data-toggle="tab" href="#menu2">Sổ tiết kiệm</a></li>
+        <li><a data-toggle="tab" href="#menu3">Công quỹ</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <!--Bang thong ke start-->
+            <div class="container-fluid">
+                <div class="col-sm-6">
+                    <label style="color: red;">Khoản chi</label>
+                    <table class="table table-bordered" id="table1">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>Ngày chi</th>
+                                <th>Số tiền chi</th>
+                                <th>Chi cho</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:bisque">
+                            <% thongke_khoanchi_vi.rows.forEach(function(item){ %>
+                            <tr>
+                                <td><%= item.datebargain.getDate() + "-" + (item.datebargain.getMonth()+1) + "-" + item.datebargain.getFullYear() %>
+                                </td>
+                                <td><%= item.moneybargain %></td>
+                                <td><%= item.typebargain %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <label class="control-label">Tổng</label>
+                    <input type="text" style="color: red" id="sum1">  
+                </div>
+                <div class="col-sm-6">
+                    <label style="color:red;">Khoản thu</label>
+                    <table class="table table-bordered" id="table2">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>Ngày thu</th>
+                                <th>Số tiền thu</th>
+                                <th>Thu về</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:bisque">
+                            <% thongke_khoanthu_vi.rows.forEach(function(item){ %>
+                            <tr>
+                                <td><%= item.dateincome.getDate() + "-" + (item.dateincome.getMonth()+1) + "-" + item.dateincome.getFullYear() %>
+                                </td>
+                                <td><%= item.moneyincome %></td>
+                                <td><%= item.typeincome %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <label class="control-label">Tổng</label>
+                    <input type="text" style="color: red" id="sum2">
+                </div>
+            </div>
+            <!--Bang thong ke end-->
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <!--Bang thong ke start-->
+            <div class="container-fluid">
+                <div class="col-sm-6">
+                    <label style="color: red;">Khoản chi</label>
+                    <table class="table table-bordered" id="table3">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>Ngày chi</th>
+                                <th>Số tiền chi</th>
+                                <th>Chi cho</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:bisque">
+                            <% thongke_khoanchi_atm.rows.forEach(function(item){ %>
+                            <tr>
+                                <td><%= item.datebargain.getDate() + "-" + (item.datebargain.getMonth()+1) + "-" + item.datebargain.getFullYear() %></td>
+                                <td><%= item.moneybargain %></td>
+                                <td><%= item.typebargain %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <label class="control-label">Tổng</label>
+                    <input type="text" style="color: red" id="sum3">
+                </div>
+                <div class="col-sm-6">
+                    <label style="color:red;">Khoản thu</label>
+                    <table class="table table-bordered" id="table4">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>Ngày thu</th>
+                                <th>Số tiền thu</th>
+                                <th>Thu về</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:bisque">
+                            <% thongke_khoanthu_atm.rows.forEach(function(item){ %>
+                            <tr>
+                                <td><%= item.dateincome.getDate() + "-" + (item.dateincome.getMonth()+1) + "-" + item.dateincome.getFullYear() %></td>
+                                <td><%= item.moneyincome %></td>
+                                <td><%= item.typeincome %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <label class="control-label">Tổng</label>
+                    <input type="text" style="color: red" id="sum4">
+                </div>
+            </div>
+
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <!--Bang thong ke start-->
+            <div class="container-fluid">
+                <div class="col-sm-6">
+                    <label style="color: red;">Khoản chi</label>
+                    <table class="table table-bordered" id="table5">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>Ngày chi</th>
+                                <th>Số tiền chi</th>
+                                <th>Chi cho</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:bisque">
+                            <% thongke_khoanchi_stt.rows.forEach(function(item){ %>
+                            <tr>
+                                <td><%= item.datebargain.getDate() + "-" + (item.datebargain.getMonth()+1) + "-" + item.datebargain.getFullYear() %></td>
+                                <td><%= item.moneybargain %></td>
+                                <td><%= item.typebargain %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <label class="control-label">Tổng</label>
+                    <input type="text" style="color: red" id="sum5">
+                </div>
+                <div class="col-sm-6">
+                    <label style="color:red;">Khoản thu</label>
+                    <table class="table table-bordered" id="table6">
+                        <thead style="background-color:aqua">
+                            <tr>
+                                <th>Ngày thu</th>
+                                <th>Số tiền thu</th>
+                                <th>Thu về</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:bisque">
+                            <% thongke_khoanthu_stt.rows.forEach(function(item){ %>
+                            <tr>
+                                <td><%= item.dateincome.getDate() + "-" + (item.dateincome.getMonth()+1) + "-" + item.dateincome.getFullYear() %></td>
+                                <td><%= item.moneyincome %></td>
+                                <td><%= item.typeincome %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <label class="control-label">Tổng</label>
+                    <input type="text" style="color: red" id="sum6">
+                </div>
+            </div>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+                <!--Bang thong ke start-->
+                <div class="container-fluid">
+                    <div class="col-sm-6">
+                        <label style="color: red;">Khoản chi</label>
+                        <table class="table table-bordered" id="table7">
+                            <thead style="background-color:aqua">
+                                <tr>
+                                    <th>Ngày chi</th>
+                                    <th>Số tiền chi</th>
+                                    <th>Chi cho</th>
+                                </tr>
+                            </thead>
+                            <tbody style="background-color:bisque">
+                                <% thongke_khoanchi_cq.rows.forEach(function(item){ %>
+                                <tr>
+                                    <td><%= item.datebargain.getDate() + "-" + (item.datebargain.getMonth()+1) + "-" + item.datebargain.getFullYear() %></td>
+                                    <td><%= item.moneybargain %></td>
+                                    <td><%= item.typebargain %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                        <label class="control-label">Tổng</label>
+                        <input type="text" style="color: red" id="sum7">
+                    </div>
+                    <div class="col-sm-6">
+                        <label style="color:red;">Khoản thu</label>
+                        <table class="table table-bordered" id="table8">
+                            <thead style="background-color:aqua">
+                                <tr>
+                                    <th>Ngày thu</th>
+                                    <th>Số tiền thu</th>
+                                    <th>Thu về</th>
+                                </tr>
+                            </thead>
+                            <tbody style="background-color:bisque">
+                                <% thongke_khoanthu_cq.rows.forEach(function(item){ %>
+                                <tr>
+                                    <td><%= item.dateincome.getDate() + "-" + (item.dateincome.getMonth()+1) + "-" + item.dateincome.getFullYear() %>
+                                    </td>
+                                    <td><%= item.moneyincome %></td>
+                                    <td><%= item.typeincome %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                        <label class="control-label">Tổng</label>
+                        <input type="text" style="color: red" id="sum8">
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+<script>
+    var table1 = document.getElementById("table1");
+    var sumVal1 = 0;
+    for(var i = 1; i < table1.rows.length ; i ++){
+        sumVal1 = sumVal1 + parseInt(table1.rows[i].cells[1].innerHTML);
+    }
+    $("#sum1").attr("value" , sumVal1 + " VNĐ");
+    var table2 = document.getElementById("table2");
+    var sumVal2 = 0;
+    for(var i = 1; i < table2.rows.length ; i ++){
+        sumVal2 = sumVal2 + parseInt(table2.rows[i].cells[1].innerHTML);
+    }
+    $("#sum2").attr("value" , sumVal2 + " VNĐ");
+    var table3 = document.getElementById("table3");
+    var sumVal3 = 0;
+    for(var i = 1; i < table3.rows.length ; i ++){
+        sumVal3 = sumVal3 + parseInt(table3.rows[i].cells[1].innerHTML);
+    }
+    $("#sum3").attr("value" , sumVal3 + " VNĐ");
+    var table4 = document.getElementById("table4");
+    var sumVal4 = 0;
+    for(var i = 1; i < table4.rows.length ; i ++){
+        sumVal4 = sumVal4 + parseInt(table4.rows[i].cells[1].innerHTML);
+    }
+    $("#sum4").attr("value" , sumVal4 + " VNĐ");
+    var table5 = document.getElementById("table5");
+    var sumVal5 = 0;
+    for(var i = 1; i < table5.rows.length ; i ++){
+        sumVal5 = sumVal5 + parseInt(table5.rows[i].cells[1].innerHTML);
+    }
+    $("#sum5").attr("value" , sumVal5 + " VNĐ");
+    var table6 = document.getElementById("table6");
+    var sumVal6 = 0;
+    for(var i = 1; i < table6.rows.length ; i ++){
+        sumVal6 = sumVal6 + parseInt(table6.rows[i].cells[1].innerHTML);
+    }
+    $("#sum6").attr("value" , sumVal6 + " VNĐ");
+    var table7 = document.getElementById("table7");
+    var sumVal7 = 0;
+    for(var i = 1; i < table7.rows.length ; i ++){
+        sumVal7 = sumVal7 + parseInt(table7.rows[i].cells[1].innerHTML);
+    }
+    $("#sum7").attr("value" , sumVal7 + " VNĐ");
+    var table8 = document.getElementById("table8");
+    var sumVal8 = 0;
+    for(var i = 1; i < table8.rows.length ; i ++){
+        sumVal8 = sumVal8 + parseInt(table8.rows[i].cells[1].innerHTML);
+    }
+    $("#sum8").attr("value" , sumVal8 + " VNĐ");
+</script>
+</html>

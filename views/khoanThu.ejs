@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Quan Ly Thu Chi Ca Nhan</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/khoanthu.css" />
+    <script src="/javascript/jquery.js"></script>
+    <script src="/javascript/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="shortcut icon" href=http://www.freshdesignweb.com/wp-content/themes/fv28/images/icon.ico />
+    <link rel="stylesheet" type="text/css" href="/css/fdw-demo.css" media="all" />
+</head>
+<script>
+    $(document).ready(function () {
+        $("#typethu").hide();
+        $('#tenkhoanthu').click(function (e) {
+            e.preventDefault();
+            $("#typethu").show();
+            $.get("http://localhost:3000/:id/loaithu", function (ketqua) {
+                $('#typethu').html(ketqua);
+                $('#typethu').html($('.ul_thu').html());
+                $('#typethu').attr('class' , 'imglist');
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#typeaccount").hide();
+        $('#accounttype').click(function (e) {
+            $("#typeaccount").show();
+        });
+		document.getElementById("typeaccount").onmouseleave = function () {
+			$("#typeaccount").hide();
+		};
+		document.getElementById("typethu").onmouseleave = function () {
+			$("#typethu").hide();
+		};
+    });
+</script>
+<style>
+#typeaccount > li {
+	padding-left:10px;
+	cursor:pointer;
+}
+</style>
+<body data-spy="scroll" data-target=".navbar" data-offset="60">
+    <!--Tiêu đề trang start-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://localhost:3000/<%= ID %>">HOME</a>
+            </div>
+            <div class="collapse navbar-collapse" id="header">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://localhost:3000/<%= ID %>/khoanchi" id="khoanchi">KHOẢN CHI</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/khoanthu" id="khoanthu">KHOẢN THU</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/loaichi">LOẠI KHOẢN CHI</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/loaithu">LOẠI KHOẢN THU</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/thongke">THỐNG KÊ</a></li>
+                    <li><a href="http://localhost:3000/<%= ID %>/about">TÀI KHOẢN</a></li>
+                    <li><a href="http://localhost:3000">ĐĂNG XUẤT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Tiêu đề trang end-->
+    <!--Table Khoan Chi start-->
+    <div id="KhoanThu">
+        <div class="container-fluid">
+            <br>
+            <br>
+            <h4 style="padding:15px;text-align: center;color: yellow;">Danh Sách Các Khoản Thu</h4>
+            <h5 style="color: yellow;">Chi tiết khoản thu</h5>
+            <form class="form-horizontal" action="/<%= ID %>/khoanthu" method="POST" role="form" autocomplete="off">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tài Khoản</label>
+                    <div class="col-sm-3">                       
+						<ul id="typeaccount">
+							<li>Ví</li>
+							<li>ATM</li>
+							<li>Sổ tiết kiệm</li>
+							<li>Công quỹ</li>
+						</ul>                        
+						<input type="text" class="form-control" placeholder="Loại tài khoản" id="accounttype" name="accounttype" required pattern="\S+.*">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Số tiền</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" placeholder="Số tiền đã thu" name="money" required pattern="\S+.*">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Khoản thu</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" placeholder="Điền tên khoản thu" id="tenkhoanthu"
+                            name="tenkhoanthu" required pattern="\S+.*">
+                        <ul id="typethu">
+							
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-3">
+                        <label for="comment">Ghi chú:</label>
+                        <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Ngày thu</label>
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control" placeholder="Ngày thu" id="candenar"
+                                     style="width:212px;" name="candenar" required pattern="\S+.*">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default" style="margin-left:28%; height:50px;"
+                                id="addRow"><label style="padding-top:8px;">Thêm mới</label></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container-fluid">
+            <form action="/<%= ID %>/khoanthu/filter" method="POST" role="form" class="form-inline" autocomplete="off">
+                <div class="col-sm-3">
+                        <label class="control-label">Lọc theo ngày</label>
+                        <input type="text" class="form-control" style="color: red" name="day">    
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="control-label">Lọc theo tháng</label>
+                        <input type="text" class="form-control" style="color: red" name="month">        
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="control-label">Lọc theo năm</label>
+                        <input type="text" class="form-control" style="color: red" name="year">
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-default" style="color: red">Lọc</button>
+                        <label class="control-label">Tổng</label>
+                        <input type="text" class="form-control" style="color: red" value="" id="sum">
+                    </div>
+            </form>
+        </div>
+        <br>
+        <!--Bang thu start-->
+        <div class="container-fluid table-responsive">
+            <table class="table table-bordered" id="table">
+                <thead style="background-color:rgb(255, 166, 0)">
+                    <tr>
+						<th>Tài khoản</th>
+                        <th>Khoản Thu</th>						
+                        <th>Số tiền</th>
+                        <th>Ngày thu</th>
+                        <th>Ghi chú</th>
+						<th>Sửa</th>
+						<th>Xoá</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color:bisque">
+                    <% khoanthu.rows.forEach(function(item){ %>
+                    <tr>
+						<td><%= item.typeaccount %></td>
+                        <td><%= item.typeincome %></td>
+                        <td><%= item.moneyincome %></td>
+                        <td><%= item.dateincome.getDate() + "-" + (item.dateincome.getMonth()+1) + "-" + item.dateincome.getFullYear() %></td>
+                        <td><%= item.note %></td>
+						<td><a href="http://localhost:3000/<%= ID %>/khoanthu/sua/<%= item.idincome %>">Sửa</a></td>
+						<td><a href="http://localhost:3000/<%= ID %>/khoanthu/xoa/<%= item.idincome %>">Xoá</a></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <!--Bang thu end-->
+    </div>
+    <!--Table Khoan thu end-->
+</body>
+<script>
+    $('#typethu').on('click', 'a', function () {
+        var temp = $(this).html();
+        $("#tenkhoanthu").attr("value", temp);
+    });
+	$('#typeaccount').on('click', 'li', function () {
+        var temp = $(this).html();
+        $("#accounttype").attr("value", temp);
+    });
+    var table = document.getElementById("table");
+    var sumVal = 0;
+    for(var i = 1; i < table.rows.length ; i ++){
+        sumVal = sumVal + parseInt(table.rows[i].cells[2].innerHTML);
+    }
+    $("#sum").attr("value" , sumVal + " VNĐ");
+</script>
+</html>

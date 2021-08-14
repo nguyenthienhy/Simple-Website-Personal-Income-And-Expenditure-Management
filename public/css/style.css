@@ -1,0 +1,134 @@
+
+
+
+/* css list sprites background ------------- */
+
+#listsprites {float:left; margin:0px; font:14px/16px 'lucida grande', tahoma, verdana, arial, sans-serif;}
+#listsprites a {border:0; color:#3B5998; text-decoration:none; line-height:30px;}
+#listsprites a:hover,
+#listsprites a:focus,
+#listsprites a:active {text-decoration:underline; background:transparent;}
+#listsprites .user {overflow:hidden; margin:0 0 10px;}
+#listsprites .user img {float:left; margin:0 8px 0 0;}
+#listsprites .user a {display:block;}
+#listsprites .fn {padding:3px 0; font-weight:bold;}
+#listsprites ul {width:290px; padding:0; margin:0; list-style:none;}
+#listsprites li a {display:block; padding:3px 8px 4px 6px;}
+#listsprites li a:hover,
+#listsprites li a:focus,
+#listsprites li a:active {
+	text-decoration:underline; 
+    -moz-box-shadow: 0px 0px 3px #403f40;
+    -webkit-box-shadow: 0px 0px 3px #403f40;
+    box-shadow: 0px 0px 3px #403f40;
+	}
+#listsprites li.current a {font-weight:bold; color:#333; background:#D8DFEA;}
+
+#listsprites li a:before {
+    content:"";
+    float:left;
+    width:28px;
+    height:30px;
+    margin:0 6px 0 0;
+    background:url(images/sprite.png);
+}
+
+#listsprites .facebook a:before {background-position:0 -0px;}
+#listsprites .twitter a:before {background-position:0 -35px;}
+#listsprites .rss a:before {background-position:0 -70px;}
+#listsprites .digg a:before {background-position:0 -108px;}
+#listsprites .youtube a:before {background-position:0 -148px;}
+
+/* Eng css list sprites background -------------- */
+
+
+/* css list with numeber circle background -------------- */
+.numberlist{
+	width:450px;
+
+}
+.numberlist ol{
+	            counter-reset: li;
+				list-style: none;
+				*list-style: decimal;
+				font: 15px 'trebuchet MS', 'lucida sans';
+				padding: 0;
+				margin-bottom: 4em;
+
+}
+.numberlist ol ol{
+				margin: 0 0 0 2em;
+			}
+			
+.numberlist a{
+				position: relative;
+				display: block;
+				padding: .4em .4em .4em 2em;
+				*padding: .4em;
+				margin: .5em 0;
+				background: #FFF;
+				color: #444;
+				text-decoration: none;
+				-moz-border-radius: .3em;
+				-webkit-border-radius: .3em;
+				border-radius: .3em;
+			}
+
+.numberlist a:hover{
+				background: #cbe7f8;
+				text-decoration:underline;
+			}
+.numberlist a:before{
+				content: counter(li);
+				counter-increment: li;
+				position: absolute;	
+				left: -1.3em;
+				top: 50%;
+				margin-top: -1.3em;
+				background: #87ceeb;
+				height: 2em;
+				width: 2em;
+				line-height: 2em;
+				border: .3em solid #fff;
+				text-align: center;
+				font-weight: bold;
+				-moz-border-radius: 2em;
+				-webkit-border-radius: 2em;
+				border-radius: 2em;
+				color:#FFF;
+			}
+
+/* End css list with numeber circle background -------------- */
+
+
+
+
+/* css list style with arrow images  -------------- */
+.imglist ul{
+	margin:0px;
+}
+.imglist li{
+	font-size:14px;
+	margin-left:25px;
+	padding:0px;
+	list-style:url(images/arrow.png);
+	line-height:30px;
+}
+.imglist li a:link, .imglist li a:visited{
+	color:#1e598e;
+	text-decoration:none;
+
+}
+.imglist li a:hover{
+	color:#0A7CAF;
+	padding:2px;
+    -moz-box-shadow: 0px 0px 12px #9e9ea3;
+    -webkit-box-shadow: 0px 0px 12px #9e9ea3;
+    box-shadow: 0px 0px 12px #9e9ea3;
+    border:none 0px #000000;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+/* End css list style with arrow images  -------------- */

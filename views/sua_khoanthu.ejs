@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<head>
+<title>Sửa khoản thu</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="/javascript/jquery.js"></script>
+    <script src="/javascript/bootstrap.min.js"></script>
+</head>
+<style>
+.jumbotron{
+	margin:100px;
+	margin-left:460px;
+	margin-right:460px;
+}
+.form-horizontal{
+	width:300px;
+	margin-left:30%;
+}
+body{
+	background-color:blue;
+}
+#form_khoan_thu{
+	height:300px;
+	overflow:auto;
+}
+.li{
+	cursor:pointer;
+}
+#typeaccount > li{
+	cursor:pointer;
+}
+#form_khoan_thu > li{
+	cursor: pointer;
+}
+</style>
+<script>
+	$(document).ready(function(){
+		$("#typeaccount").hide();
+        $('#sualoaitaikhoan').click(function (e) {
+            $("#typeaccount").show();
+        });
+		document.getElementById("typeaccount").onmouseleave = function () {
+			$("#typeaccount").hide();
+		};
+		$('#typeaccount').on('click', 'li', function () {
+			var temp = $(this).html();
+			$("#sualoaitaikhoan").attr("value" , temp);
+		});
+	});
+</script>
+<body>
+<div class="jumbotron">
+	<div class="modal_custom">
+	<form class="form-horizontal" action="/<%= ID %>/khoanthu/sua/<%= idincome %>" role="form" method="POST" autocomplete="off">
+		<div class="form-group">
+			<label for="usr">Khoản thu:</label>
+			<input type="text" class="form-control" id="suatenkhoanthu" name="suatenkhoanthu">
+			<ul id="form_khoan_thu">
+				
+			</ul>
+		</div>
+		<div class="form-group">
+			<label for="pwd">Số tiền:</label>
+			<input type="text" class="form-control" id="suamoney_khoan_thu" name="suamoney_khoan_thu">
+		</div>
+		<div class="form-group">
+			<label for="pwd">Ngày thu:</label>
+			<input type="date" class="form-control" id="suangaythu" name="suangaythu">
+		</div>
+		<div class="form-group">
+			<label for="pwd">Ghi chú:</label>
+			<input type="text" class="form-control" id="suaghichukhoanthu" name="suaghichukhoanthu">
+		</div>
+		<div class="form-group">
+			<label for="pwd">Loại tài khoản:</label>
+			<input type="text" class="form-control" id="sualoaitaikhoan" name="sualoaitaikhoan">
+			<ul id="typeaccount">
+                <li>Ví</li>
+                <li>ATM</li>
+                <li>Sổ tiết kiệm</li>
+                <li>Công quỹ</li>
+            </ul> 
+		</div>
+		<input type="button" class="btn btn-default" value="Cancel" id="cancel_sua_thu">
+		<button type="submit" class="btn btn-default">Sửa</button>     
+	</form>
+	</div>
+</div>
+</body>
+<script>
+    document.getElementById("form_khoan_thu").onmouseleave = function () {
+        $("#form_khoan_thu").hide();
+    };
+    $('#form_khoan_thu').on('click', 'li', function () {
+        var temp = $(this).html();
+        $("#suatenkhoanthu").attr("value" , temp);
+    });
+</script>
+<script>
+		$("#form_khoan_thu").hide();
+        $('#suatenkhoanthu').click(function (e) {
+            e.preventDefault();
+            $("#form_khoan_thu").show();
+            $.get("http://localhost:3000/:id/loaithu", function (ketqua) {
+                $('#form_khoan_thu').html(ketqua);
+                $('#form_khoan_thu').html($('.ul_thu').html());
+            });
+        });
+</script>
+<script>
+	$("#cancel_sua_thu").click(function(){
+		window.location.href="http://localhost:3000/<%= ID %>/khoanthu";
+	})
+</script>
+</html>
